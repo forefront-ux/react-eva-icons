@@ -1,0 +1,26 @@
+{
+  "name": "react-eva-icon",
+  "version": "1.0.0",
+  "description": "Eva icons with React and ARIA support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forefront-ux/react-eva-icon.git"
+  },
+  "keywords": [
+    "eva",
+    "icons",
+    "react",
+    "aria",
+    "a11y"
+  ],
+  "author": "Kuma Li",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/forefront-ux/react-eva-icon/issues"
+  },
+  "homepage": "https://github.com/forefront-ux/react-eva-icon#readme"
+}
