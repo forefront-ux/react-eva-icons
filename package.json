@@ -7,6 +7,10 @@
   "sideEffects": false,
   "scripts": {
     "build": "node scripts/build.js && yarn build-mjs && yarn build-cjs",
+    "prebuild": "yarn run precss && npm run css && yarn run postcss",
+    "precss": "node scripts/build-eva-css.js prepare",
+    "css": "cd src/icons/eva-icons && npm i && npm run icons:prepare && npx webpack --config webpack.evacss.config.js",
+    "postcss": "node scripts/build-eva-css.js post && cd src/icons/eva-icons && git checkout .",
     "build-mjs": "tsc && babel ./lib/esm -d ./lib/esm",
     "build-cjs": "tsc -p ./tsconfig.commonjs.json"
   },
@@ -35,7 +39,6 @@
     "@babel/core": "^7.4.5",
     "@types/react": "^16.8.18",
     "babel-eslint": "^10.0.1",
-    "camelcase": "^5.3.1",
     "cheerio": "^1.0.0-rc.3",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
