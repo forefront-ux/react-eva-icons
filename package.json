@@ -27,6 +27,9 @@
     "url": "https://github.com/forefront-ux/react-eva-icon/issues"
   },
   "homepage": "https://github.com/forefront-ux/react-eva-icon#readme",
+  "dependencies": {
+    "camelcase": "^5.3.1"
+  },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
