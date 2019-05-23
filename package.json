@@ -2,9 +2,13 @@
   "name": "react-eva-icon",
   "version": "1.0.0",
   "description": "Eva icons with React and ARIA support",
-  "main": "index.js",
+  "main": "lib",
+  "types": "./lib/esm/index.d.ts",
+  "sideEffects": false,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node scripts/build.js && yarn build-mjs && yarn build-cjs",
+    "build-mjs": "tsc && babel ./lib/esm -d ./lib/esm",
+    "build-cjs": "tsc -p ./tsconfig.commonjs.json"
   },
   "repository": {
     "type": "git",
@@ -22,5 +26,24 @@
   "bugs": {
     "url": "https://github.com/forefront-ux/react-eva-icon/issues"
   },
-  "homepage": "https://github.com/forefront-ux/react-eva-icon#readme"
+  "homepage": "https://github.com/forefront-ux/react-eva-icon#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@types/react": "^16.8.18",
+    "babel-eslint": "^10.0.1",
+    "camelcase": "^5.3.1",
+    "cheerio": "^1.0.0-rc.3",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "fs-extra": "^8.0.1",
+    "glob-promise": "^3.4.0",
+    "prettier": "^1.17.1",
+    "typescript": "^3.4.5"
+  }
 }

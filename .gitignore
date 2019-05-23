@@ -59,3 +59,10 @@ typings/
 
 # next.js build output
 .next
+
+# project generated
+index.d.ts
+all.js
+all.d.ts
+eva
+lib
