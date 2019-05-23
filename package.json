@@ -1,5 +1,5 @@
 {
-  "name": "react-eva-icon",
+  "name": "@forefront-ux/react-eva-icons",
   "version": "1.0.0",
   "description": "Eva icons with React and ARIA support",
   "main": "lib",

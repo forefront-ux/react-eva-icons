@@ -38,10 +38,10 @@ export function IconBase(props:IconBaseProps & { attr: {} | undefined }): JSX.El
     let className = '';
     if (conf.className) className = conf.className;
     if (props.className) className = (className ? className + ' ' : '') + props.className;
-    const {attr, title, ariaHidden = false, ...svgProps} = props;
-    let svgClassName = `eva eva-${props.svgClassName}`;
+    const {attr, title, ariaHidden = false, svgClassName, ...svgProps} = props;
+    let classNameForSvg = `eva eva-${props.svgClassName}`;
     if (props.animation) {
-      svgClassName += ` eva-animation eva-icon-hover-${props.animation}`;
+      classNameForSvg += ` eva-animation eva-icon-hover-${props.animation}`;
     }
     return (
       <i className={`eva-hover ${className}`} onClick={props.onClick}>
@@ -50,7 +50,7 @@ export function IconBase(props:IconBaseProps & { attr: {} | undefined }): JSX.El
           {...attr}
           {...svgProps}
           fill={props.color || conf.color || 'inherit'}
-          className={svgClassName}
+          className={classNameForSvg}
           height={computedSize}
           width={computedSize}
           xmlns="http://www.w3.org/2000/svg"

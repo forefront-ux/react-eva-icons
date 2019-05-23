@@ -53,6 +53,13 @@ async function convertIconData(svg) {
               obj[newName] = attribs[name];
             }
             break;
+          case "dataName":
+              obj['dataname'] = attribs[name];
+              break;
+          case "height":
+              obj[newName] = attribs[name];
+              obj["opacity"] = "0";
+              break;
           default:
             obj[newName] = attribs[name];
             break;
@@ -63,7 +70,7 @@ async function convertIconData(svg) {
   // convert to [ { tag: 'path', attr: { d: 'M436 160c6.6 ...', ... }, child: { ... } } ]
   const elementToTree = (/** @type {Cheerio} */ element) =>
     element
-      .filter((_, e) => e.tagName && !["style"].includes(e.tagName))
+      .filter((_, e) => e.tagName && !["style", "defs", "title"].includes(e.tagName))
       .map((_, e) => ({
         tag: e.tagName,
         attr: attrConverter(e.attribs, e.tagName),

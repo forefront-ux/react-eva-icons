@@ -1,2 +1,2 @@
-# react-eva-icon
-Eva Icon with React and ARIA support
+# react-eva-icons
+Eva Icons with React and ARIA support
