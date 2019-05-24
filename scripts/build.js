@@ -110,8 +110,8 @@ async function dirInit() {
   await createDirIfNotExist(path.resolve(LIB, "esm"));
   await createDirIfNotExist(path.resolve(LIB, "cjs"));
   await fs.copyFile(
-    path.resolve(__dirname, "..", "src/package.json"),
-    path.resolve(LIB, "package.json")
+    path.resolve(__dirname, "..", "package.json"),
+    path.resolve(DIST, "package.json")
   );
 
   const write = (filePath, str) =>
@@ -130,15 +130,12 @@ async function dirInit() {
     "import { IconTree, IconType } from './lib'\n// THIS FILE IS AUTO GENERATED\n"
   );
   await write(
-    ["package.json"],
-    JSON.stringify(
-      {
-        sideEffects: false,
-        module: "./index.esm.js"
-      },
-      null,
-      2
-    ) + "\n"
+    ["lib", "package.json"],
+    JSON.stringify({
+      sideEffects: false,
+      module: "./esm/index.js",
+      main: "./cjs/index.js"
+    }, null, 2) + "\n"
   );
 }
 async function writeIconModule(icon) {

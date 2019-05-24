@@ -2,9 +2,10 @@
   "name": "@forefront-ux/react-eva-icons",
   "version": "2.0.0",
   "description": "Eva icons with React and ARIA support",
-  "main": "lib",
-  "types": "./lib/esm/index.d.ts",
+  "main": "./index.js",
   "sideEffects": false,
+  "module": "./index.esm.js",
+  "types": "./index.d.ts",
   "scripts": {
     "build": "node scripts/build.js && yarn build-mjs && yarn build-cjs",
     "prebuild": "yarn run precss && npm run css && yarn run postcss",
