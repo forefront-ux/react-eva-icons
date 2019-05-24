@@ -1,6 +1,6 @@
 {
   "name": "@forefront-ux/react-eva-icons",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Eva icons with React and ARIA support",
   "main": "./index.js",
   "sideEffects": false,
