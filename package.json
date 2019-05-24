@@ -11,8 +11,8 @@
     "precss": "node scripts/build-eva-css.js prepare",
     "css": "cd src/icons/eva-icons && npm i && npm run icons:prepare && npx webpack --config webpack.evacss.config.js",
     "postcss": "node scripts/build-eva-css.js post && cd src/icons/eva-icons && git checkout .",
-    "build-mjs": "tsc && babel ./lib/esm -d ./lib/esm",
-    "build-cjs": "tsc -p ./tsconfig.commonjs.json"
+    "build-mjs": "tsc --outDir ./build/lib/esm && babel ./build/lib/esm -d ./build/lib/esm",
+    "build-cjs": "tsc --outDir ./build/lib/cjs -p ./tsconfig.commonjs.json"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,7 @@
 node_modules/
-src/icons/*/
+src/
 scripts/
 *.tgz
 *.log
 .babelrc
+plugin

@@ -13,7 +13,7 @@ const prepare = function () {
 const moveGeneratedCssFile = function() {
     fs.copySync(
         path.resolve(__dirname, '../src/icons/eva-icons/package-build/eva.css'),
-        path.resolve(__dirname, '../eva/index.css')
+        path.resolve(__dirname, '../build/index.css')
     );
     console.log('generate eva css success!');
 }
