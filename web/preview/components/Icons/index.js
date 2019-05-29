@@ -12,8 +12,8 @@ const styles = theme => ({
     icon: {
         marginBottom: theme.spacing(1),
         paddingRight: theme.spacing(1),
-        width: '150px',
-        height: '150px',
+        width: '186px',
+        height: '186px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -31,8 +31,8 @@ const Icons = props => {
                 const CustomTag = EvaIcons[key];
                 return (
                     <div key={key} className={classes.icon}>
-                        <CustomTag size={size} color={color} />
-                        <p>{CustomTag.displayName}</p>
+                        <CustomTag size={size} color={color} animation="pulse" />
+                        <p>{CustomTag.displayName.replace('Eva', '')}</p>
                     </div>
                 );
             })}
