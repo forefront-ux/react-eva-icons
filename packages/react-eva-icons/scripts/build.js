@@ -59,7 +59,9 @@ async function convertIconData(svg) {
           case "height":
           case "points":
               obj[newName] = attribs[name];
-              obj["opacity"] = "0";
+              if (obj[newName] === '24' || obj[newName] === '0 0 24 0 24 24 0 24') {
+                obj["opacity"] = "0";
+              }
               break;
           default:
             obj[newName] = attribs[name];
