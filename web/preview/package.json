@@ -1,0 +1,27 @@
+{
+  "name": "react-eva-icons-preview",
+  "version": "1.0.0",
+  "description": "preview site for react-eva-icons",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "Kuma Li",
+  "license": "MIT",
+  "dependencies": {
+    "@forefront-ux/react-eva-icons": "^2.0.5",
+    "@material-ui/core": "^4.0.0",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-less": "^1.0.1",
+    "autoprefixer": "^9.5.1",
+    "clean-css": "^4.2.1",
+    "less": "^3.9.0",
+    "next": "^8.1.0",
+    "next-compose-plugins": "^2.2.0",
+    "postcss": "^7.0.16",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
