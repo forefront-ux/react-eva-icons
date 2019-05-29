@@ -1,56 +1,17 @@
 {
   "name": "@forefront-ux/react-eva-icons",
-  "version": "2.0.1",
-  "description": "Eva icons with React and ARIA support",
-  "main": "./index.js",
-  "sideEffects": false,
-  "module": "./index.esm.js",
-  "types": "./index.d.ts",
-  "scripts": {
-    "build": "node scripts/build.js && yarn build-mjs && yarn build-cjs",
-    "prebuild": "yarn run precss && npm run css && yarn run postcss",
-    "precss": "node scripts/build-eva-css.js prepare",
-    "css": "cd src/icons/eva-icons && npm i && npm run icons:prepare && npx webpack --config webpack.evacss.config.js",
-    "postcss": "node scripts/build-eva-css.js post && cd src/icons/eva-icons && git checkout .",
-    "build-mjs": "tsc --outDir ./build/lib/esm && babel ./build/lib/esm -d ./build/lib/esm",
-    "build-cjs": "tsc --outDir ./build/lib/cjs -p ./tsconfig.commonjs.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/forefront-ux/react-eva-icon.git"
-  },
-  "keywords": [
-    "eva",
-    "icons",
-    "react",
-    "aria",
-    "a11y"
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "author": "Kuma Li",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/forefront-ux/react-eva-icon/issues"
+  "scripts": {
+    "submodule": "git submodule update --init --recursive",
+    "submodule-deinit": "git submodule deinit --all",
+    "lint": "node ./node_modules/eslint/bin/eslint.js .",
+    "version-up": "lerna version"
   },
-  "homepage": "https://github.com/forefront-ux/react-eva-icon#readme",
   "dependencies": {
-    "camelcase": "^5.3.1"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@types/react": "^16.8.18",
-    "babel-eslint": "^10.0.1",
-    "cheerio": "^1.0.0-rc.3",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-node": "^9.0.1",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-standard": "^4.0.0",
-    "fs-extra": "^8.0.1",
-    "glob-promise": "^3.4.0",
-    "prettier": "^1.17.1",
-    "typescript": "^3.4.5"
+    "lerna": "^3.14.1"
   }
 }
