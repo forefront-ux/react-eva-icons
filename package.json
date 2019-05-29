@@ -1,0 +1,17 @@
+{
+  "name": "@forefront-ux/react-eva-icons",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "submodule": "git submodule update --init --recursive",
+    "submodule-deinit": "git submodule deinit --all",
+    "lint": "node ./node_modules/eslint/bin/eslint.js .",
+    "version-up": "lerna version"
+  },
+  "dependencies": {
+    "lerna": "^3.14.1"
+  }
+}

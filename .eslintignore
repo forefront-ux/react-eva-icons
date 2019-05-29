@@ -1,0 +1,6 @@
+**/node_modules/*
+**/build/*
+**/docs/*
+**/bin/*
+packages/react-eva-icons/src/icons/*
+!packages/react-eva-icons/src/icons/index.js
