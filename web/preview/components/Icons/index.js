@@ -25,13 +25,14 @@ const Icons = props => {
     const { classes } = props;
     const size = 48;
     const color = '#3F51B5';
+    const animation = 'pulse';
     return (
         <div className={classes.icons}>
             {Object.keys(EvaIcons).map(key => {
                 const CustomTag = EvaIcons[key];
                 return (
                     <div key={key} className={classes.icon}>
-                        <CustomTag size={size} color={color} animation="pulse" />
+                        <CustomTag size={size} color={color} animation={animation} />
                         <p>{CustomTag.displayName.replace('Eva', '')}</p>
                     </div>
                 );
