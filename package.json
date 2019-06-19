@@ -5,6 +5,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "postinstall": "git submodule update --init --recursive",
     "docs:typescript:check": "tslint -p docs/tsconfig.json",
     "submodule": "git submodule update --init --recursive",
     "submodule-deinit": "git submodule deinit --all",

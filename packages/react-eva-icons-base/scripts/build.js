@@ -5,7 +5,7 @@ const fs = require("fs-extra");
 const camelcase = require("camelcase");
 import svgr from '@svgr/core';
 
-const { icons } = require("../src/icons");
+const { icons } = require("../icons");
 
 // file path
 const rootDir = path.resolve(__dirname, "../src");
