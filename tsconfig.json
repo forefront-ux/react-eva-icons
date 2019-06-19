@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es5",
+      "lib": ["es6", "dom"],
+      "jsx": "react",
+      "moduleResolution": "node",
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "noEmit": true,
+      "experimentalDecorators": true,
+      "baseUrl": "./packages",
+      "allowSyntheticDefaultImports": true,
+      "noErrorTruncation": true,
+      "paths": {
+        "@forefront-ux/react-eva-icons-base": ["./react-eva-icons-base/src"],
+        "@forefront-ux/react-eva-icons": ["./react-eva-icons/src"]
+      }
+    },
+    "exclude": ["**/build/"]
+  }
+  

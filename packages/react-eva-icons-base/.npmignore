@@ -3,5 +3,3 @@ src/
 scripts/
 *.tgz
 *.log
-.babelrc
-plugin

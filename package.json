@@ -1,17 +1,58 @@
 {
-  "name": "@forefront-ux/react-eva-icons",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
   "license": "MIT",
   "scripts": {
+    "docs:typescript:check": "tslint -p docs/tsconfig.json",
     "submodule": "git submodule update --init --recursive",
     "submodule-deinit": "git submodule deinit --all",
     "lint": "node ./node_modules/eslint/bin/eslint.js .",
-    "version-up": "lerna version"
+    "version-up": "lerna version",
+    "typescript": "lerna run typescript"
   },
   "dependencies": {
     "lerna": "^3.14.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-modules-umd": "^7.2.0",
+    "@babel/plugin-transform-react-constant-elements": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.5",
+    "@types/react": "^16.8.20",
+    "babel-eslint": "^10.0.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "cross-env": "^5.2.0",
+    "dtslint": "^0.8.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "esm": "^3.2.25",
+    "fs-extra": "^8.0.1",
+    "glob-promise": "^3.4.0",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.15.6",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^5.0.3",
+    "rollup-plugin-size-snapshot": "^0.9.0",
+    "rollup-plugin-terser": "^5.0.0",
+    "tslint": "^5.17.0",
+    "typescript": "^3.5.2"
   }
 }

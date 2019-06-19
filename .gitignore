@@ -67,5 +67,8 @@ all.js
 all.d.ts
 eva
 lib
+build/
 dist/
+generated/
 package-lock.json
+size-snapshot.json
