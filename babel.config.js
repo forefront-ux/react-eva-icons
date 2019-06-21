@@ -7,9 +7,9 @@ if (process.env.BABEL_ENV === 'es') {
     [
       '@babel/preset-env',
       {
-        modules: ['esm', 'production-umd'].includes(process.env.BABEL_ENV) ? false : 'commonjs'
-      }
-    ]
+        modules: ['esm', 'production-umd'].includes(process.env.BABEL_ENV) ? false : 'commonjs',
+      },
+    ],
   ];
 }
 
@@ -20,27 +20,25 @@ const productionPlugins = [
     {
       mode: 'unsafe-wrap',
     },
-  ]
+  ],
 ];
 
 module.exports = {
   presets: defaultPresets.concat(['@babel/preset-react']),
-  plugins: [
-    '@babel/plugin-transform-runtime'
-  ],
+  plugins: ['@babel/plugin-transform-runtime'],
   ignore: [/@babel[\\|/]runtime/], // Fix a Windows issue.
   env: {
     cjs: {
-      plugins: productionPlugins
+      plugins: productionPlugins,
     },
     esm: {
-      plugins: productionPlugins
+      plugins: productionPlugins,
     },
     es: {
-      plugins: productionPlugins
+      plugins: productionPlugins,
     },
     'production-umd': {
-      plugins: productionPlugins
-    }
-  }
+      plugins: productionPlugins,
+    },
+  },
 };
