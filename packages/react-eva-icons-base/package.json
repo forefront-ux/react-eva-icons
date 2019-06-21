@@ -1,13 +1,13 @@
 {
   "name": "@forefront-ux/react-eva-icons-base",
   "version": "2.0.5",
-  "description": "Transpile Eva Icons' SVG Content to React Component",
+  "description": "React Component for Eva Icons with ARIA support",
   "scripts": {
     "prebuild": "rimraf ./build",
-    "build": "yarn build:svg && yarn build:cjs && yarn build:esm && yarn build:es && yarn build:umd && yarn build:copy-files && yarn build:css",
-    "build:cjs": "cross-env NODE_ENV=production BABEL_ENV=cjs babel --config-file ../../babel.config.js ./src/generated --out-dir ./build --ignore \"**/*.test.js\"",
-    "build:esm": "cross-env NODE_ENV=production BABEL_ENV=esm babel --config-file ../../babel.config.js ./src/generated --out-dir ./build/esm --ignore \"**/*.test.js\"",
-    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ../../babel.config.js ./src/generated --out-dir ./build/es --ignore \"**/*.test.js\"",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:es && yarn build:umd && yarn build:copy-files && yarn build:css",
+    "build:cjs": "cross-env NODE_ENV=production BABEL_ENV=cjs babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore \"**/*.test.js\"",
+    "build:esm": "cross-env NODE_ENV=production BABEL_ENV=esm babel --config-file ../../babel.config.js ./src --out-dir ./build/esm --ignore \"**/*.test.js\"",
+    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ../../babel.config.js ./src --out-dir ./build/es --ignore \"**/*.test.js\"",
     "build:umd": "cross-env BABEL_ENV=production-umd rollup -c scripts/rollup.config.js",
     "build:svg": "node -r esm scripts/build.js",
     "build:copy-files": "node scripts/copy-files.js",
@@ -15,7 +15,7 @@
     "build:css": "cd icons/eva-icons && npm i --no-save && npm run icons:prepare && npx webpack --config webpack.evacss.config.js",
     "postbuild:css": "node scripts/build-eva-css.js post",
     "release": "yarn build && npm publish build --tag latest",
-    "typescript": "tslint -p tsconfig.json \"src/generated/*.{ts,tsx}\""
+    "typescript": "tslint -p tsconfig.json \"src/**/*.{ts,tsx}\""
   },
   "repository": {
     "type": "git",

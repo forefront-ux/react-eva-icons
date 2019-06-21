@@ -4,7 +4,7 @@ const path = require('path');
 const prepare = function () {
     clearSubmodule();
     fs.copySync(
-        path.resolve(__dirname, '../src/webpack.evacss.config.js'),
+        path.resolve(__dirname, './webpack.evacss.config.js'),
         path.resolve(__dirname, '../icons/eva-icons/webpack.evacss.config.js')
     );
     console.log('copy webpack.evacss.config.js success!');

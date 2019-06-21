@@ -5,7 +5,7 @@ const glob = require('glob');
 
 const packagePath = process.cwd();
 const buildPath = path.join(packagePath, './build');
-const srcPath = path.join(packagePath, './src/generated');
+const srcPath = path.join(packagePath, './src/utils');
 
 async function includeFileInBuild(file) {
   const sourcePath = path.resolve(packagePath, file);
@@ -87,7 +87,7 @@ async function prepend(file, string) {
 }
 
 async function addLicense(packageData) {
-  const license = `/** @license React-Eva-Icon-Base v${packageData.version}
+  const license = `/** @license React-Eva-Icons-Base v${packageData.version}
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -130,7 +130,7 @@ async function run() {
     // TypeScript
     await typescriptCopy({ from: srcPath, to: buildPath });
 
-    await createModulePackages({ from: srcPath, to: buildPath });
+    // await createModulePackages({ from: srcPath, to: buildPath });
   } catch (err) {
     console.error(err);
     process.exit(1);

@@ -6,10 +6,10 @@ import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
 
-const input = './src/generated/index.js';
+const input = './src/index.js';
 const globals = {
   react: 'React',
-  'react-dom': 'ReactDOM',
+  'react-dom': 'ReactDOM'
 };
 const babelOptions = {
   exclude: /node_modules/,
@@ -20,6 +20,20 @@ const babelOptions = {
 const commonjsOptions = {
   ignoreGlobal: true,
   include: /node_modules/,
+  namedExports: {
+    '../../node_modules/prop-types/index.js': [
+      'node',
+      'string',
+      'oneOf',
+      'bool'
+    ],
+    '../../node_modules/react-is/index.js': [
+      'ForwardRef',
+      'isLazy',
+      'isMemo',
+      'isValidElementType',
+    ],
+  },
 };
 
 function onwarn(warning) {
