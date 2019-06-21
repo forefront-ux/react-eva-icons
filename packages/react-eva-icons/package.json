@@ -1,5 +1,5 @@
 {
-  "name": "@forefront-ux/react-eva-icons-base",
+  "name": "@forefront-ux/react-eva-icons",
   "version": "2.0.5",
   "description": "React Component for Eva Icons with ARIA support",
   "scripts": {
