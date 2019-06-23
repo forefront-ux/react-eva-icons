@@ -15,6 +15,7 @@
     "build:css": "cd icons/eva-icons && npm i --no-save && npm run icons:prepare && npx webpack --config webpack.evacss.config.js",
     "postbuild:css": "node scripts/build-eva-css.js post",
     "release": "yarn build && npm publish build --tag latest",
+    "test": "cross-env NODE_ENV=test BABEL_ENV=test jest --no-cache --config ./test/jest.config.js",
     "typescript": "tslint -p tsconfig.json \"src/**/*.{ts,tsx}\""
   },
   "repository": {

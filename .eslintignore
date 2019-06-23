@@ -1,10 +1,10 @@
 /.git
 /.next
 /coverage
-/packages/react-eva-icons-base/icons
-/packages/react-eva-icons-base/scripts
-/packages/react-eva-icons-base/src
-!/packages/react-eva-icons-base/src/utils
+/packages/react-eva-icons/icons
+/packages/react-eva-icons/scripts
+/packages/react-eva-icons/src
+!/packages/react-eva-icons/src/utils
 /web
 /scripts
 /tmp

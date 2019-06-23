@@ -37,21 +37,6 @@ module.exports = {
     'jsx-a11y/label-has-for': 'off', // deprecated
     'jsx-a11y/no-autofocus': 'off', // We are a library, people do what they want.
 
-    // 'material-ui/docgen-ignore-before-comment': 'error',
-    // 'material-ui/restricted-path-imports': 'error',
-
-    // 'mocha/handle-done-callback': 'error',
-    // 'mocha/no-exclusive-tests': 'error',
-    // 'mocha/no-global-tests': 'error',
-    // 'mocha/no-identical-title': 'error',
-    // 'mocha/no-nested-tests': 'error',
-    // 'mocha/no-pending-tests': 'error',
-    // 'mocha/no-return-and-callback': 'error',
-    // 'mocha/no-sibling-hooks': 'error',
-    // 'mocha/no-skipped-tests': 'error',
-    // 'mocha/no-top-level-hooks': 'error',
-    // 'mocha/valid-suite-description': 'error',
-
     // This rule is great for raising people awareness of what a key is and how it works.
     'react/no-array-index-key': 'off',
     'react/destructuring-assignment': 'off',
@@ -84,8 +69,17 @@ module.exports = {
         'newlines-between': 'never',
       },
     ],
-
-    // 'react-hooks/rules-of-hooks': 'error',
-    // 'react-hooks/exhaustive-deps': 'error',
   },
+  overrides: [
+    {
+      files: ['packages/**/*.test.js'],
+      globals: {
+        browser: true
+      },
+      env: {
+        jest: true,
+        node: true
+      }
+    },
+  ],
 };
