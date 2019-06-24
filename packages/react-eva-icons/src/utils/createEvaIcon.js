@@ -1,5 +1,5 @@
 import React from 'react';
-import EvaIcon from './EvaIcon';
+import EvaIcon from '../EvaIcon';
 
 export default function createEvaIcon(path, displayName) {
   const Component = React.memo(

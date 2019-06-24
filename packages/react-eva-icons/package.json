@@ -44,13 +44,5 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "sideEffects": false,
-  "devDependencies": {
-    "@babel/runtime": "^7.4.5",
-    "@svgr/core": "^4.3.0",
-    "@svgr/plugin-jsx": "^4.3.0",
-    "@svgr/plugin-prettier": "^4.2.0",
-    "@svgr/plugin-svgo": "^4.2.0",
-    "camelcase": "^5.3.1"
-  }
+  "sideEffects": false
 }

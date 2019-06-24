@@ -1,10 +1,13 @@
 import * as React from 'react';
-
-export interface EvaIconOptionProps {
+export interface EvaIconProps {
     /**
      * Animation type for icon.
      */
     animation?: 'zoom' | 'pulse' | 'shake' | 'flip';
+    /**
+     * Node passed into the SVG element.
+     */
+    children: JSX.Element;
     /**
      * Applies a color attribute to the SVG element.
      */
@@ -34,12 +37,6 @@ export interface EvaIconOptionProps {
      * Applies a width attribute to the SVG element.
      */
     width?: string;
-}
-export interface EvaIconProps extends EvaIconOptionProps {
-    /**
-     * Node passed into the SVG element.
-     */
-    children: JSX.Element;
 }
 
 declare const EvaIcon: React.ComponentType<EvaIconProps>;

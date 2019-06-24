@@ -45,9 +45,9 @@ export default [
     input,
     onwarn,
     output: {
-      file: 'build/umd/react-eva-icons-base.development.js',
+      file: 'build/umd/react-eva-icons.development.js',
       format: 'umd',
-      name: 'ReactEvaIconsBase',
+      name: 'ReactEvaIcons',
       globals,
     },
     external: Object.keys(globals),
@@ -63,9 +63,9 @@ export default [
     input,
     onwarn,
     output: {
-      file: 'build/umd/react-eva-icons-base.production.min.js',
+      file: 'build/umd/react-eva-icons.production.min.js',
       format: 'umd',
-      name: 'ReactEvaIconsBase',
+      name: 'ReactEvaIcons',
       globals,
     },
     external: Object.keys(globals),

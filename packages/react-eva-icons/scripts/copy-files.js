@@ -5,7 +5,7 @@ const glob = require('glob');
 
 const packagePath = process.cwd();
 const buildPath = path.join(packagePath, './build');
-const srcPath = path.join(packagePath, './src/utils');
+const srcPath = path.join(packagePath, './src');
 
 async function includeFileInBuild(file) {
   const sourcePath = path.resolve(packagePath, file);
@@ -130,7 +130,7 @@ async function run() {
     // TypeScript
     await typescriptCopy({ from: srcPath, to: buildPath });
 
-    // await createModulePackages({ from: srcPath, to: buildPath });
+    await createModulePackages({ from: srcPath, to: buildPath });
   } catch (err) {
     console.error(err);
     process.exit(1);
