@@ -1,6 +1,6 @@
 {
   "name": "@forefront-ux/react-eva-icons",
-  "version": "2.0.5",
+  "version": "3.0.0-alpha.0",
   "description": "React Component for Eva Icons with ARIA support",
   "scripts": {
     "prebuild": "rimraf ./build",
