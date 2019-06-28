@@ -21,8 +21,8 @@ yarn add @forefront-ux/react-eva-icons
 
 #### CDN
 ```
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/@forefront-ux/react-eva-icons-base@3.0.0/index.css" />
-<script src="https://unpkg.com/@forefront-ux/react-eva-icons-base@3.0.0/index.js"></script>
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/@forefront-ux/react-eva-icons@3.0.0/index.css" />
+<script src="https://unpkg.com/@forefront-ux/react-eva-icons@3.0.0/index.js"></script>
 ```
 
 ### Usage
