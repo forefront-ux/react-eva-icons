@@ -30,12 +30,12 @@ yarn add @forefront-ux/react-eva-icons
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Activity } from '@forefront-ux/react-eva-icons';
+import { Github } from '@forefront-ux/react-eva-icons';
 import '@forefront-ux/react-eva-icons/index.css'; // if you use CDN installation, ignore this line.
 
 function App() {
     return (
-        <Activity />
+        <Github />
     );
 };
 
@@ -47,11 +47,11 @@ Yes, it's really all you need to get started as you can see in this live and int
 
 ## Documentation
 ---
-Check out our documentation website.
+Not ready yet.
 
 ## Contributing
 ---
-We'd greatly appreciate any contribution you make.
+We'd greatly appreciate any [contribution](./CONTRIBUTING.md) you make.
 
 ## Changelog
 ---
@@ -61,8 +61,9 @@ Recently Updated? Please read the [changelog](https://github.com/forefront-ux/re
 ---
 React-Eva-Icons is only made possible thanks to these great projects that inspired us:
 - [Eva Icons - A pack of more than 480 beautifully crafted Open Source icons. SVG, Sketch, Web Font and Animations support.](https://akveo.github.io/eva-icons/#/)
-- [react-icons](https://github.com/react-icons/react-icons)
 - [Material-UI](https://material-ui.com/)
+- [React-Icons](https://github.com/react-icons/react-icons)
+
 
 ## License
 ---
