@@ -1,179 +1,145 @@
-const cheerio = require("cheerio");
 const glob = require("glob-promise");
 const path = require("path");
 const fs = require("fs-extra");
-const camelcase = require("camelcase");
+import Mustache from 'mustache';
+import SVGO from 'svgo';
 
-const { icons } = require("../src/icons");
+const { icons } = require("../icons");
 
 // file path
-const rootDir = path.resolve(__dirname, "../build");
+const rootDir = path.resolve(__dirname, "../src");
 const DIST = path.resolve(rootDir, ".");
-const LIB = path.resolve(rootDir, "lib");
 
-// utils function
-async function createDirIfNotExist (directory) {
-  try {
-    await fs.ensureDir(directory)
-    console.log(`create <${directory}> success!`)
-  } catch (err) {
-    console.error(err)
-  }
-}
+// svgo config
+const svgo = new SVGO({
+  floatPrecision: 4,
+  plugins: [
+    { removeHiddenElems: true },
+    { removeEmptyContainers: true },
+    { removeAttrs: {attrs: '(class|id|data-name)'} },
+    { removeStyleElement: true },
+  ],
+});
 
 // logic
 
 async function getIconFiles(content) {
   return glob(content.files);
 }
-async function convertIconData(svg) {
-  const $svg = cheerio.load(svg, { xmlMode: true })("svg");
 
-  // filter/convert attributes
-  // 1. remove class attr
-  // 2. convert to camelcase ex: fill-opacity => fillOpacity
-  const attrConverter = (
-    /** @type {{[key: string]: string}} */ attribs,
-    /** @type string */ tagName
-  ) =>
-    attribs &&
-    Object.keys(attribs)
-      .filter(
-        name =>
-          ![
-            "class",
-            ...(tagName === "svg" ? ["xmlns", "xmlns:xlink", "xml:space", "width", "height"] : []) // if tagName is svg remove size attributes
-          ].includes(name)
-      )
-      .reduce((obj, name) => {
-        const newName = camelcase(name);
-        switch (newName) {
-          case "fill":
-            if (attribs[name] === "none") {
-              obj[newName] = attribs[name];
-            }
-            break;
-          case "dataName":
-              obj['dataname'] = attribs[name];
-              break;
-          case "height":
-          case "points":
-              obj[newName] = attribs[name];
-              if (['24', '24 24 0 24 0 0', '0 0 24 0 24 24 0 24'].includes(obj[newName])) {
-                obj["opacity"] = "0";
-              }
-              break;
-          default:
-            obj[newName] = attribs[name];
-            break;
-        }
-        return obj;
-      }, {});
-
-  // convert to [ { tag: 'path', attr: { d: 'M436 160c6.6 ...', ... }, child: { ... } } ]
-  const elementToTree = (/** @type {Cheerio} */ element) =>
-    element
-      .filter((_, e) => e.tagName && !["style", "defs", "title"].includes(e.tagName))
-      .map((_, e) => ({
-        tag: e.tagName,
-        attr: attrConverter(e.attribs, e.tagName),
-        child:
-          e.children && e.children.length
-            ? elementToTree(cheerio(e.children))
-            : undefined
-      }))
-      .get();
-
-  const tree = elementToTree($svg);
-  return tree[0]; // like: [ { tag: 'path', attr: { d: 'M436 160c6.6 ...', ... }, child: { ... } } ]
+function getComponentName(file) {
+  const fileName = path.basename(file, path.extname(file));
+  const parts = fileName
+    .split('-')
+    .map(part => part.charAt(0).toUpperCase() + part.substring(1));
+  return parts.join('');
 }
-function generateIconRow(icon, formattedName, iconData, type = "module", rawName) {
-  switch (type) {
-    case "module":
-      return (
-        `export var ${formattedName} = function (props) {\n` +
-        `  return GenIcon(${JSON.stringify(iconData)})("${rawName}", props);\n` +
-        `};\n` +
-        `${formattedName}.displayName = "${formattedName}";\n`
-      );
-    case "common":
-      return (
-        `module.exports.${formattedName} = function (props) {\n` +
-        `  return GenIcon(${JSON.stringify(iconData)})("${rawName}", props);\n` +
-        `};\n` +
-        `module.exports.${formattedName}.displayName = "${formattedName}";\n`
-      );
-    case "dts":
-      return `export declare const ${formattedName}: IconType;\n`;
+
+// Noise introduced by Google by mistake
+const noises = [
+  ['<path fill="#fff" d="M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z" />', ''],
+  ['<path fill="#fff" d="M0 0h24v24H0V0zm0 0h24v24H0V0z" />', ''],
+  ['<path fill="#fff" d="M0 0h24v24H0z" />', ''],
+  ['="M0 0h24v24H0V0zm0 0h24v24H0V0z', '="'],
+  ['="M0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0z', '="'],
+];
+
+async function cleanPaths(svgPath, data) {
+  // Remove hardcoded color fill before optimizing so that empty groups are removed
+  const input = data
+    .replace(/ fill="#231f20"/g, '')
+    .replace(/<rect fill="#fff" width="24" height="24"\/>/g, '');
+
+  const result = await svgo.optimize(input);
+
+  // Extract the paths from the svg string
+  // Clean xml paths
+  let paths = result.data
+    .replace(/<svg[^>]*>/g, '')
+    .replace(/<\/svg>/g, '')
+    .replace(/"\/>/g, '" />')
+    .replace(/<defs\/>/g,'')
+    .replace(/fill="#231f20"/g, '')
+    .replace(/fill-opacity=/g, 'fillOpacity=')
+    .replace(/xlink:href=/g, 'xlinkHref=')
+    .replace(/clip-rule=/g, 'clipRule=')
+    .replace(/fill-rule=/g, 'fillRule=')
+    .replace(/ clip-path=".+?"/g, '') // Fix visibility issue and save some bytes.
+    .replace(/<clipPath.+?<\/clipPath>/g, '') // Remove unused definitions
+    .replace(/<path[^/]*d="M0 0h24v24H0z" \/>/g, '')
+    .replace(/<path[^/]*d="M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z" \/>/g, '')
+    .replace(/<path[^/]*d="M0 0h24v24H0V0zm0 0h24v24H0V0z" \/>/g, '');
+  
+  const sizeMatch = svgPath.match(/^.*_([0-9]+)px.svg$/);
+  const size = sizeMatch ? Number(sizeMatch[1]) : null;
+
+  if (size !== null && size !== 24) {
+    const scale = Math.round((24 / size) * 100) / 100; // Keep a maximum of 2 decimals
+    paths = paths.replace('clipPath="url(#b)" ', '');
+    paths = paths.replace(/<path /g, `<path transform="scale(${scale}, ${scale})" `);
   }
+
+  noises.forEach(([search, replace]) => {
+    if (paths.indexOf(search) !== -1) {
+      paths = paths.replace(search, replace);
+    }
+  });
+
+  // Add a fragment when necessary.
+  if ((paths.match(/\/>/g) || []).length > 1) {
+    paths = `<React.Fragment>${paths}</React.Fragment>`;
+  }
+
+  return paths;
 }
 
-async function dirInit() {
-  await createDirIfNotExist(DIST);
-  await createDirIfNotExist(path.resolve(LIB, "esm"));
-  await createDirIfNotExist(path.resolve(LIB, "cjs"));
-  await fs.copyFile(
-    path.resolve(__dirname, "..", "package.json"),
-    path.resolve(DIST, "package.json")
-  );
-
-  const write = (filePath, str) =>
-    fs.writeFile(path.resolve(DIST, ...filePath), str, "utf8");
-
-  await write(
-    ["index.js"],
-    "// THIS FILE IS AUTO GENERATED\nvar GenIcon = require('./lib').GenIcon\n"
-  );
-  await write(
-    ["index.esm.js"],
-    "// THIS FILE IS AUTO GENERATED\nimport { GenIcon } from './lib';\n"
-  );
-  await write(
-    ["index.d.ts"],
-    "import { IconTree, IconType } from './lib'\n// THIS FILE IS AUTO GENERATED\n"
-  );
-  await write(
-    ["lib", "package.json"],
-    JSON.stringify({
-      sideEffects: false,
-      module: "./esm/index.js",
-      main: "./cjs/index.js"
-    }, null, 2) + "\n"
-  );
+async function getComponentContent(file, name, template) {
+  const svgCode = await fs.readFile(file, "utf8");
+  const paths = await cleanPaths(file, svgCode);
+  return Mustache.render(template, {
+    paths,
+    componentName: name,
+  });
 }
+
+async function writeIconComponent(write, name, file, template) {
+  // write icon component
+  const componentContent = await getComponentContent(file, name, template);
+  await write(path.resolve(DIST, `${name}.js`), componentContent);
+}
+
+function addContentToIndexFile(indexStr, name) {
+  return indexStr + `export { default as ${name} } from './${name}';\n`;
+}
+
 async function writeIconModule(icon) {
-  const appendFile = fs.appendFile;
+  const write = (filePath, str) =>
+    fs.writeFile(filePath, str, "utf8");
   const exists = new Set(); // for remove duplicate
+  let indexStr = '';
   for (const content of icon.contents) {
     const files = await getIconFiles(content);
-
+    const template = await fs.readFile(path.resolve(__dirname, 'templateEvaIcon.js'), {
+      encoding: 'utf8',
+    });
     for (const file of files) {
-      const svgStr = await fs.readFile(file, "utf8");
-      const iconData = await convertIconData(svgStr);
-
-      const rawName = path.basename(file, path.extname(file));
-      const pascalName = camelcase(rawName, { pascalCase: true });
-      const name =
-        (content.formatter && content.formatter(pascalName)) || pascalName;
-      if (exists.has(name)) continue;
-      exists.add(name);
-
-      // write like: module/fa/index.esm.js
-      const modRes = generateIconRow(icon, name, iconData, "module", rawName);
-      await appendFile(path.resolve(DIST, "index.esm.js"), modRes, "utf8");
-      const comRes = generateIconRow(icon, name, iconData, "common", rawName);
-      await appendFile(path.resolve(DIST, "index.js"), comRes, "utf8");
-      const dtsRes = generateIconRow(icon, name, iconData, "dts", rawName);
-      await appendFile(path.resolve(DIST, "index.d.ts"), dtsRes, "utf8");
-
-      exists.add(file);
+      const name = getComponentName(file);
+      if (exists.has(name)) {
+        continue;
+      } else {
+        exists.add(name);
+        await writeIconComponent(write, name, file, template);
+        indexStr = addContentToIndexFile(indexStr, name);
+        exists.add(file);
+        console.log(`created ${name}`);
+      }
     }
   }
+  await write(path.resolve(DIST, `index.js`), indexStr);
 }
 
 async function main() {
   try {
-    await dirInit();
     for (const icon of icons) {
       await writeIconModule(icon);
     }

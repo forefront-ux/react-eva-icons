@@ -1,57 +1,48 @@
 {
   "name": "@forefront-ux/react-eva-icons",
   "version": "2.0.5",
-  "description": "Eva icons with React and ARIA support",
-  "main": "./index.js",
-  "sideEffects": false,
-  "module": "./index.esm.js",
-  "types": "./index.d.ts",
+  "description": "React Component for Eva Icons with ARIA support",
   "scripts": {
-    "build": "node scripts/build.js && yarn build-mjs && yarn build-cjs",
-    "prebuild": "yarn run precss && npm run css && yarn run postcss",
-    "precss": "node scripts/build-eva-css.js prepare",
-    "css": "cd src/icons/eva-icons && npm i && npm run icons:prepare && npx webpack --config webpack.evacss.config.js",
-    "postcss": "node scripts/build-eva-css.js post && cd src/icons/eva-icons && git checkout .",
-    "build-mjs": "tsc --outDir ./build/lib/esm && babel ./build/lib/esm -d ./build/lib/esm",
-    "build-cjs": "tsc --outDir ./build/lib/cjs -p ./tsconfig.commonjs.json",
-    "publishbuild": "npm publish build --access=public"
+    "prebuild": "rimraf ./build",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:es && yarn build:umd && yarn build:copy-files && yarn build:css",
+    "build:cjs": "cross-env NODE_ENV=production BABEL_ENV=cjs babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore \"**/*.test.js\"",
+    "build:esm": "cross-env NODE_ENV=production BABEL_ENV=esm babel --config-file ../../babel.config.js ./src --out-dir ./build/esm --ignore \"**/*.test.js\"",
+    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ../../babel.config.js ./src --out-dir ./build/es --ignore \"**/*.test.js\"",
+    "build:umd": "cross-env BABEL_ENV=production-umd rollup -c scripts/rollup.config.js",
+    "build:svg": "node -r esm scripts/build.js",
+    "build:copy-files": "node scripts/copy-files.js",
+    "prebuild:css": "node scripts/build-eva-css.js prepare",
+    "build:css": "cd icons/eva-icons && npm i --no-save && npm run icons:prepare && npx webpack --config webpack.evacss.config.js",
+    "postbuild:css": "node scripts/build-eva-css.js post",
+    "release": "yarn build && npm publish build --tag latest",
+    "test": "cross-env NODE_ENV=test BABEL_ENV=test jest --no-cache --config ./test/jest.config.js",
+    "typescript": "tslint -p tsconfig.json \"src/**/*.{ts,tsx}\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/forefront-ux/react-eva-icon.git"
+    "url": "git+https://github.com/forefront-ux/react-eva-icons.git"
   },
   "keywords": [
     "eva",
     "icons",
-    "react",
-    "aria",
-    "a11y"
+    "svg",
+    "react"
   ],
   "author": "Kuma Li",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/forefront-ux/react-eva-icon/issues"
+    "url": "https://github.com/forefront-ux/react-eva-icons/issues"
   },
-  "homepage": "https://github.com/forefront-ux/react-eva-icon#readme",
-  "dependencies": {
-    "camelcase": "^5.3.1"
+  "homepage": "https://github.com/forefront-ux/react-eva-icons#readme",
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@types/react": "^16.8.18",
-    "babel-eslint": "^10.0.1",
-    "cheerio": "^1.0.0-rc.3",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-node": "^9.0.1",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-standard": "^4.0.0",
-    "fs-extra": "^8.0.1",
-    "glob-promise": "^3.4.0",
-    "prettier": "^1.17.1",
-    "typescript": "^3.4.5"
-  }
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "sideEffects": false
 }
