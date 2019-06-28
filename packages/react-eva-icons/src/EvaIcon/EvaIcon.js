@@ -3,21 +3,33 @@ import PropTypes from 'prop-types';
 
 const EvaIcon = React.forwardRef(function EvaIcon(props, ref) {
   const {
-    children,
-    focusable = false,
-    size = '1em',
-    width,
-    height,
-    color = 'inherit',
-    viewBox = '0 0 24 24',
-    titleAccess,
     animation,
+    children,
+    color = 'inherit',
+    focusable = false,
+    height,
+    hover,
+    infinite = false,
+    size = '1em',
+    titleAccess,
+    viewBox = '0 0 24 24',
+    width,
     ...restProps
   } = props;
 
-  const svgClassName = animation ? `eva eva-animation eva-icon-hover-${animation}` : '';
-
-  return (
+  let svgClassName = '';
+  if (animation) {
+    svgClassName += 'eva eva-animation';
+    if (hover!==false) {
+      svgClassName += ` eva-icon-hover-${animation}`;
+    } else {
+      svgClassName += ` eva-icon-${animation}`;
+    }
+    if (infinite) {
+      svgClassName += ' eva-infinite';
+    }
+  }
+  return hover ? (
     <i
       className="eva-hover"
       ref={ref}
@@ -37,6 +49,21 @@ const EvaIcon = React.forwardRef(function EvaIcon(props, ref) {
         {children}
       </svg>
     </i>
+  ) : (
+    <svg
+      focusable={focusable}
+      width={width || size}
+      height={height || size}
+      viewBox={viewBox}
+      className={svgClassName}
+      fill={color}
+      aria-hidden={titleAccess ? 'false' : 'true'}
+      role={titleAccess ? 'img' : 'presentation'}
+      {...restProps}
+    >
+      {titleAccess ? <title>{titleAccess}</title> : null}
+      {children}
+    </svg>
   );
 });
 
@@ -61,6 +88,14 @@ EvaIcon.propTypes = {
    * Applies a height attribute to the SVG element.
    */
   height: PropTypes.string,
+  /**
+   * Trigger the animation when hover on the SVG element
+   */
+  hover: PropTypes.bool,
+  /**
+   * Applies a infinite animation loop on the SVG element
+   */
+  infinite: PropTypes.bool,
   /** 
    * Applies a width/height attribute to the SVG element.
    */

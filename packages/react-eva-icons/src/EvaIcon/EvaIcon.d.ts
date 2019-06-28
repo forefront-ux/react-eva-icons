@@ -21,6 +21,14 @@ export interface EvaIconProps {
      */
     height?: string;
     /**
+     * Trigger the animation when hover on the SVG element
+     */
+    hover?: boolean;
+    /**
+     * Applies a infinite animation loop on the SVG element
+     */
+    infinite?: boolean;
+    /**
      * Provides a human-readable title for the element that contains it.
      * https://www.w3.org/TR/SVG-access/#Equivalent
      */
