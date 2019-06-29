@@ -7,7 +7,7 @@ React-Eva-Icons make it easier to use Eva Icons in your React component.
 ## Getting Started
 
 ### Installation
----
+
 #### NPM/YARN
 Install the package in your project directory with npm or yarn:
 
@@ -26,7 +26,7 @@ yarn add @forefront-ux/react-eva-icons
 ```
 
 ### Usage
----
+
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -46,19 +46,19 @@ Yes, it's really all you need to get started as you can see in this live and int
 [![Edit Button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github-3nvxo)
 
 ## Documentation
----
+
 Not ready yet.
 
 ## Contributing
----
+
 We'd greatly appreciate any [contribution](./CONTRIBUTING.md) you make.
 
 ## Changelog
----
+
 Recently Updated? Please read the [changelog](https://github.com/forefront-ux/react-eva-icons/releases).
 
 ## Thanks
----
+
 React-Eva-Icons is only made possible thanks to these great projects that inspired us:
 - [Eva Icons - A pack of more than 480 beautifully crafted Open Source icons. SVG, Sketch, Web Font and Animations support.](https://akveo.github.io/eva-icons/#/)
 - [Material-UI](https://material-ui.com/)
@@ -66,5 +66,5 @@ React-Eva-Icons is only made possible thanks to these great projects that inspir
 
 
 ## License
----
+
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details
