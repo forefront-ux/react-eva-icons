@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import { EvaGithub, EvaTwitter } from '@forefront-ux/react-eva-icons';
+import { List, Code, Github, Twitter } from '@forefront-ux/react-eva-icons';
 import compose from '../utils/compose';
 import Head from '../components/Head';
 import Icons from '../components/Icons';
@@ -96,7 +96,8 @@ const styles = theme => ({
     fontWeight: 'bold',
   },
   pre: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#000',
+    color: '#fff',
     fontSize: '14px',
     fontWeight: 'normal',
     padding: '10px',
@@ -116,6 +117,30 @@ const App = props => {
             React Eva Icons
           </Typography>
           <div className={classes.grow} />
+          <Tooltip title="Code Example" enterDelay={300}>
+            <IconButton
+              component="a"
+              color="inherit"
+              href="#code"
+              aria-label="Code Example"
+              data-ga-event-category="AppBar"
+              data-ga-event-action="Code Example"
+            >
+              <Code hover={true} color="#fff" animation="pulse" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Icon List" enterDelay={300}>
+            <IconButton
+              component="a"
+              color="inherit"
+              href="#iconlist"
+              aria-label="Icon List"
+              data-ga-event-category="AppBar"
+              data-ga-event-action="Icon List"
+            >
+              <List hover={true} color="#fff" animation="pulse" />
+            </IconButton>
+          </Tooltip>
           <Tooltip title="Twitter" enterDelay={300}>
             <IconButton
               component="a"
@@ -125,7 +150,7 @@ const App = props => {
               data-ga-event-category="AppBar"
               data-ga-event-action="Twitter"
             >
-              <EvaTwitter color="#fff" animation="pulse" />
+              <Twitter hover={true} color="#fff" animation="pulse" />
             </IconButton>
           </Tooltip>
           <Tooltip title="GitHub" enterDelay={300}>
@@ -138,7 +163,7 @@ const App = props => {
               data-ga-event-category="AppBar"
               data-ga-event-action="GitHub"
             >
-              <EvaGithub color="#fff" animation="pulse" />
+              <Github hover={true} color="#fff" animation="pulse" />
             </IconButton>
           </Tooltip>
         </Toolbar>
@@ -146,11 +171,11 @@ const App = props => {
       <main className={classes.main}>
         <AppBar className={classes.appBarPlaceHolder}>Place Holder</AppBar>
         <div className={classes.hero}>
-          <h1 className={classes.heroTitle}>React Eva Icons <span className={classes.version}>v2.0.5</span></h1>
+          <h1 className={classes.heroTitle}>React Eva Icons <span className={classes.version}>v3.0.0</span></h1>
           <p className={classes.heroDesc}>
             Make it easier to use Eva Icons in your React projects.
           </p>
-          <div className={classes.tutorial}>
+          <div className={classes.tutorial} id="code">
             <div>Tutorial</div>
             <div className={classes.tutorialBlock}>
               <div className={classes.code}>
@@ -164,60 +189,32 @@ const App = props => {
   yarn add @forefront-ux/react-eva-icons
                   `}
                 </pre>
-              </div>
-              <div className={classes.code}>
-                <p>Import it into your React code</p>
-                <pre className={classes.pre}>
-                  {`
-  ...
-  
-  import {
-    EvaActivity,
-    EvaActivityOutline,
-  } from '@forefront-ux/react-eva-icons';
-  import '@forefront-ux/react-eva-icons/index.css';
-  
-  ...
-
-  const Icon = () => (
-    <EvaActivity
-      color="#3F51B5"
-      size={48}
-      animation="zoom"
-    />
-  )
-
-  const Icon = () => (
-    <EvaActivityOutline
-      color="#3F51B5"
-      size={48}
-      animation="zoom"
-    />
-  )
-
-  ...
-                  `}
-                </pre>
-              </div>
-              <div className={classes.code}>
                 <p>Props</p>
                 <pre className={classes.pre}>
-                  {`
-  color: PropTypes.string,
-  size: PropTypes.number,
-  animation: PropTypes.oneOf([
-    'zoom',
-    'pulse',
-    'shake',
-    'flip'
-  ])
-                  `}
+                {`
+  color: string,
+  size: string,
+  width: string,
+  height: string,
+  animation: string,
+  hover: bool,
+  infinite: bool
+                `}
                 </pre>
+              </div>
+              <div className={classes.code} style={{ width: '100%' }}>
+                <p>Try it in codesandbox</p>
+                <iframe
+                  src="https://codesandbox.io/embed/github-3nvxo?fontsize=14"
+                  title="github"
+                  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media"
+                  style={{ width: '100%', height: '620px', border: 0,  borderRadius: '4px', overflow: 'hidden' }}
+                  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" />
               </div>
             </div>
           </div>
         </div>
-        <Icons />
+        <Icons id="iconlist" />
       </main>
       <footer className={classes.footer}>
         &copy; CopyRight 2019 Forefront-UX

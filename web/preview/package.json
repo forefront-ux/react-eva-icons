@@ -13,7 +13,7 @@
   "author": "Kuma Li",
   "license": "MIT",
   "dependencies": {
-    "@forefront-ux/react-eva-icons": "^2.0.5",
+    "@forefront-ux/react-eva-icons": "^3.0.0-alpha.0",
     "@material-ui/core": "^4.0.0",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",

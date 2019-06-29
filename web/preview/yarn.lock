@@ -721,12 +721,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.7.1.tgz#9833722341379fb7d67f06a4b00ab3c37913da53"
   integrity sha512-OYpa/Sg+2GDX+jibUfpZVn1YqSVRpYmTLF2eyAfrFTIJSbwyIrc+YscayoykvaOME/wV4BV0Sa0yqdMrgse6mA==
 
-"@forefront-ux/react-eva-icons@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@forefront-ux/react-eva-icons/-/react-eva-icons-2.0.5.tgz#448535d9ba371e4806273cc53be3e3424f8416c6"
-  integrity sha512-O43LltFpcftX814+MdgfuXhNH22h8aJvayeqJjXeIC7eo9CbRac4cB9gDCBXlLrDFHfFskXYOCreHSh+SSnYRg==
-  dependencies:
-    camelcase "^5.3.1"
+"@forefront-ux/react-eva-icons@^3.0.0-alpha.0":
+  version "3.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@forefront-ux/react-eva-icons/-/react-eva-icons-3.0.0-alpha.0.tgz#d3fe3c19d3d56d67d929fab2f8b202ec8aff2e56"
+  integrity sha512-ArQc60JVZSDR+VR7swTSfbCemAfVlt0s6XmDvvYRFEROIb3PvTE4toR7udsWkUqwmI8O/A39QILhdXT3wz4mzg==
 
 "@material-ui/core@^4.0.0":
   version "4.0.0"
@@ -1555,11 +1553,6 @@ cache-base@^1.0.1:
     to-object-path "^0.3.0"
     union-value "^1.0.0"
     unset-value "^1.0.0"
-
-camelcase@^5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
-  integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 caniuse-lite@^1.0.30000957, caniuse-lite@^1.0.30000967:
   version "1.0.30000971"
