@@ -23,7 +23,7 @@
     "next": "^8.1.0",
     "next-compose-plugins": "^2.2.0",
     "now": "^15.3.0",
-    "postcss": "^7.0.16",
+    "postcss": "^7.0.36",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }
